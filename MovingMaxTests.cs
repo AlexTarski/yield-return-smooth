@@ -54,7 +54,25 @@ public class MovingMaxTests
 		CheckMax(100500, new double[] { 1, 2, 5, 1, 0, 6 }, new double[] { 1, 2, 5, 5, 5, 6 });
 	}
 
-	private void CheckMax(int windowWidth, double[] ys, double[] expectedYs)
+    [Test]
+    public void TestFromComments1()
+    {
+        CheckMax(3, new double[] { 1, 2, 3, 4, 3, 2, 2, 1, 1 }, new double[] { 1, 2, 3, 4, 4, 4, 3, 2, 2 });
+    }
+
+    [Test]
+    public void TestFromComments2()
+    {
+        CheckMax(5, new double[] { 2, 6, 2, 1, 3, 2, 5, 8, 1 }, new double[] { 2, 6, 6, 6, 6, 6, 5, 8, 8 });
+    }
+
+    [Test]
+    public void TestFromComments3()
+    {
+        CheckMax(4, new double[] { 5, 4, 3, 2, 1, 0 }, new double[] { 5, 5, 5, 5, 4, 3 });
+    }
+
+    private void CheckMax(int windowWidth, double[] ys, double[] expectedYs)
 	{
 		var dataPoints = ys.Select((v, index) => new DataPoint(GetX(index), v));
 		var actual = Factory.CreateAnalyzer().MovingMax(dataPoints, windowWidth).ToList();
